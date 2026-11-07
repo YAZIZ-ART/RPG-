@@ -12,8 +12,26 @@ const HERO_PALETTES=[ ["#241b43","#5b3c83","#30233f"],["#e8d5c2","#d6b27b","#8b5
 const state={mode:"menu",selected:0,player:null,world:null,enemies:[],particles:[],projectiles:[],camera:{x:0,y:0},time:0,last:0,toastTime:0,joy:{x:0,y:0},quality:"high",combo:0,worldSeed:731,frame:0,previousElement:null,weatherTime:0};
 let viewW=innerWidth,viewH=innerHeight,dpr=1,joyPointer=null;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-function resize(){viewW=innerWidth;viewH=innerHeight;dpr=Math.min(window.devicePixelRatio||1,state.quality==="low"?1:1.5);canvas.width=Math.round(viewW*dpr);canvas.height=Math.round(viewH*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingEnabled=false;}
-window.addEventListener("resize",resize);resize();
+function resize(){
+ viewW=Math.max(1,window.innerWidth||document.documentElement.clientWidth);
+ viewH=Math.max(1,window.innerHeight||document.documentElement.clientHeight);
+ const mobile= Math.min(viewW,viewH)<700;
+ dpr=Math.min(window.devicePixelRatio||1,state.quality==="low"?1:(mobile?1.25:1.6));
+ canvas.width=Math.round(viewW*dpr);canvas.height=Math.round(viewH*dpr);
+ canvas.style.width=viewW+"px";canvas.style.height=viewH+"px";
+ ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingEnabled=false;
+}
+window.addEventListener("resize",resize,{passive:true});
+window.addEventListener("orientationchange",()=>setTimeout(resize,180),{passive:true});
+if(window.visualViewport)window.visualViewport.addEventListener("resize",resize,{passive:true});
+resize();
+async function requestLandscapeMode(){
+ try{
+  if(!document.fullscreenElement&&document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();
+ }catch(e){/* Fullscreen is optional; the landscape prompt remains available. */}
+ try{if(screen.orientation?.lock)await screen.orientation.lock("landscape");}catch(e){/* Some Android browsers only allow orientation lock in installed/PWA mode. */}
+ setTimeout(resize,160);
+}
 function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));if(id)$(id)?.classList.add("active");}
 function menu(){state.mode="menu";$("game-ui").classList.add("hidden");showScreen("main-menu");GameAudio.stopMusic();}
 function toast(message){const el=$("toast");el.textContent=message;el.style.opacity="1";state.toastTime=2.2;}
@@ -39,6 +57,7 @@ function createPlayer(c){
  return {x:46*32,y:51*32,r:10,speed:150,hp:120,maxHp:120,mp:80,maxMp:80,level:1,xp:0,nextXp:100,element:c.element,characterId:c.id,characterName:c.name,weapon:c.weapon,face:{x:0,y:1},attackCd:0,skillCd:0,dashCd:0,invuln:0,attackAnim:0,walk:0,alive:true};
 }
 function startGame(){
+ requestLandscapeMode();
  if(!state.player)state.player=createPlayer(selectedCharacter());
  state.player.alive=true;state.mode="game";
  state.world=new World(state.worldSeed);state.enemies=[];state.particles=[];state.projectiles=[];state.time=0;state.combo=0;
