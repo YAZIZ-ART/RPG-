@@ -6,13 +6,18 @@
 <meta name="theme-color" content="#101827">
 <meta name="description" content="Chronicles of the Five — petualangan RPG pixel-art dengan lima elemen, eksplorasi, monster, dan sihir.">
 <title>Chronicles of the Five — 2D Pixel RPG</title>
-<link rel="stylesheet" href="styles.css?v=2.1">
+<link rel="stylesheet" href="styles.css?v=3.0">
 <link rel="preload" href="src/assets/terrain-atlas.png" as="image">
 </head>
 <body>
 <div id="app">
  <canvas id="game" aria-label="Dunia permainan"></canvas>
  <div class="vignette"></div>
+ <div id="orientation-hint" class="orientation-hint" aria-live="polite">
+  <div class="orientation-icon">▱ ↻</div>
+  <b>PUTAR PERANGKAT KAMU</b>
+  <span>Chronicles of the Five dirancang untuk dimainkan dalam mode landscape.</span>
+ </div>
 
  <section id="main-menu" class="screen active">
   <div class="menu-stars"></div><div class="menu-content">
@@ -71,5 +76,5 @@
  <section id="pause-screen" class="screen overlay"><div class="panel modal-panel"><div class="eyebrow">GAME PAUSED</div><h2>Petualangan Dijeda</h2><button id="resume-game" class="btn primary full">LANJUTKAN</button><button id="save-game" class="btn full">SIMPAN PERMAINAN</button><button id="quit-game" class="btn full">KEMBALI KE MENU</button></div></section>
  <div id="error-screen" class="error-screen hidden"><b>Game gagal dimulai</b><span id="error-message">Terjadi kesalahan.</span><button onclick="location.reload()">MUAT ULANG</button></div>
 </div>
-<script src="src/data.js?v=2.1"></script><script src="src/audio.js?v=2.1"></script><script src="src/world.js?v=2.1"></script><script src="src/vfx.js?v=2.1"></script><script src="src/main.js?v=2.1"></script>
+<script src="src/data.js?v=3.0"></script><script src="src/audio.js?v=3.0"></script><script src="src/world.js?v=3.0"></script><script src="src/vfx.js?v=3.0"></script><script src="src/main.js?v=3.0"></script>
 </body></html>
