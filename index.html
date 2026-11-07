@@ -1,117 +1,75 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <meta name="theme-color" content="#100b2b">
-  <title>RPG Adventure — 16-bit Open World</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<meta name="description" content="Chronicles of the Five — petualangan RPG pixel-art dengan lima elemen, eksplorasi, monster, dan sihir.">
+<title>Chronicles of the Five — 2D Pixel RPG</title>
+<link rel="stylesheet" href="styles.css?v=2.1">
+<link rel="preload" href="src/assets/terrain-atlas.png" as="image">
 </head>
 <body>
-  <div id="app">
-    <canvas id="game" aria-label="RPG Adventure game"></canvas>
+<div id="app">
+ <canvas id="game" aria-label="Dunia permainan"></canvas>
+ <div class="vignette"></div>
 
-    <section id="main-menu" class="screen active">
-      <div class="menu-backdrop"></div>
-      <div class="menu-content">
-        <div class="crest">✦</div>
-        <p class="eyebrow">A PIXEL FANTASY ADVENTURE</p>
-        <h1>RPG <span>ADVENTURE</span></h1>
-        <p class="subtitle">The Five Elemental Realms</p>
-        <div class="menu-buttons">
-          <button class="big-button gold" id="new-game">▶ &nbsp; MULAI PETUALANGAN</button>
-          <button class="big-button" id="continue-game">▣ &nbsp; LANJUTKAN</button>
-          <button class="big-button" id="open-options">⚙ &nbsp; PENGATURAN</button>
-          <button class="big-button" id="open-credits">✦ &nbsp; KREDIT</button>
-        </div>
-        <div class="menu-foot">WASD / ARROW KEYS · SPACE ATTACK · SHIFT DASH</div>
-      </div>
-    </section>
-
-    <section id="character-screen" class="screen">
-      <div class="panel character-panel">
-        <div class="screen-heading">
-          <p class="eyebrow">CHOOSE YOUR DESTINY</p>
-          <h2>Pemilihan Karakter</h2>
-          <p>Pilih satu dari 20 petualang dengan elemen dan senjata unik.</p>
-        </div>
-        <div id="character-grid" class="character-grid"></div>
-        <div class="screen-actions">
-          <button class="big-button" id="back-menu">← KEMBALI</button>
-          <button class="big-button gold" id="confirm-character">KONFIRMASI →</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="options-screen" class="screen">
-      <div class="panel options-panel">
-        <p class="eyebrow">GAME CONFIGURATION</p><h2>Pengaturan</h2>
-        <label>Volume musik <input id="music-volume" type="range" min="0" max="1" step=".05" value=".35"></label>
-        <label>Volume efek <input id="sfx-volume" type="range" min="0" max="1" step=".05" value=".65"></label>
-        <label>Kualitas partikel
-          <select id="particle-quality"><option value="high">Tinggi</option><option value="medium">Sedang</option><option value="low">Rendah (perangkat ringan)</option></select>
-        </label>
-        <button class="big-button gold" id="options-back">SIMPAN & KEMBALI</button>
-      </div>
-    </section>
-
-    <section id="credits-screen" class="screen">
-      <div class="panel options-panel">
-        <p class="eyebrow">A WORLD BUILT FOR ADVENTURE</p><h2>Kredit</h2>
-        <p>RPG Adventure — proyek game browser 16-bit.</p>
-        <p>Visual, dunia, karakter, partikel, dan audio dibuat secara prosedural menggunakan Canvas dan JavaScript.</p>
-        <button class="big-button gold" id="credits-back">KEMBALI</button>
-      </div>
-    </section>
-
-    <section id="game-ui" class="hidden">
-      <header class="hud-top">
-        <div class="player-card">
-          <div class="portrait" id="portrait">A</div>
-          <div class="stats">
-            <div class="player-name"><b id="hud-name">Akira</b><span id="hud-level">Lv. 1</span></div>
-            <div class="bar hp"><i id="hp-fill"></i><span id="hp-text">100 / 100</span></div>
-            <div class="bar mp"><i id="mp-fill"></i><span id="mp-text">60 / 60</span></div>
-            <div class="xp-track"><i id="xp-fill"></i></div>
-          </div>
-        </div>
-        <div class="element-bar" id="element-bar">
-          <button data-element="fire" class="element active" title="Api">🔥</button>
-          <button data-element="water" class="element" title="Air">💧</button>
-          <button data-element="earth" class="element" title="Tanah">🪨</button>
-          <button data-element="lightning" class="element" title="Listrik">⚡</button>
-          <button data-element="wind" class="element" title="Udara">🌀</button>
-        </div>
-        <div class="mini-wrap"><canvas id="minimap" width="150" height="110"></canvas><span>N</span></div>
-      </header>
-
-      <div class="quest-box"><b>✦ PETUALANGAN PERTAMA</b><span id="quest-text">Jelajahi hutan dan temukan penjaga.</span></div>
-      <div class="combat-toast" id="toast"></div>
-      <div class="bottom-hud">
-        <div class="joystick" id="joystick"><div class="joy-ring"></div><div class="joy-knob" id="joy-knob"></div></div>
-        <div class="action-buttons">
-          <button id="dash-btn" class="action small">DASH</button>
-          <button id="element-btn" class="action">ELEMEN</button>
-          <button id="skill-btn" class="action">SKILL</button>
-          <button id="attack-btn" class="action large">SERANG</button>
-        </div>
-      </div>
-      <div class="interaction-hint" id="interaction-hint"></div>
-      <div class="pause-button"><button id="pause-btn">Ⅱ</button></div>
-    </section>
-
-    <section id="pause-screen" class="screen overlay">
-      <div class="panel options-panel">
-        <p class="eyebrow">ADVENTURE PAUSED</p><h2>Permainan Dijeda</h2>
-        <button class="big-button gold" id="resume-game">LANJUTKAN</button>
-        <button class="big-button" id="save-game">SIMPAN PERMAINAN</button>
-        <button class="big-button" id="quit-game">KELUAR KE MENU</button>
-      </div>
-    </section>
+ <section id="main-menu" class="screen active">
+  <div class="menu-stars"></div><div class="menu-content">
+   <div class="brand-mark">✦</div><div class="eyebrow">AN OPEN WORLD PIXEL RPG</div>
+   <h1>CHRONICLES <span>OF THE FIVE</span></h1>
+   <p class="subtitle">Lima elemen. Satu takdir. Dunia yang menunggu untuk dijelajahi.</p>
+   <div class="menu-actions">
+    <button id="new-game" class="btn primary">MULAI PETUALANGAN <span>▶</span></button>
+    <button id="continue-game" class="btn">LANJUTKAN PERMAINAN</button>
+    <button id="open-options" class="btn">PENGATURAN</button>
+    <button id="open-credits" class="btn">KREDIT</button>
+   </div>
+   <div class="menu-bottom">WASD / ARROW KEYS · J / SPACE SERANG · K SKILL · SHIFT DASH</div>
   </div>
-  <script src="src/data.js"></script>
-  <script src="src/audio.js"></script>
-  <script src="src/world.js"></script>
-  <script src="src/main.js"></script>
-</body>
-</html>
+ </section>
+
+ <section id="character-screen" class="screen">
+  <div class="selection-layout panel">
+   <header class="section-head"><div><div class="eyebrow">CHOOSE YOUR HERO</div><h2>Pilih Petualang</h2><p>Setiap karakter memiliki elemen awal dan senjata khas.</p></div><div class="step-count">01 <i>/ 20</i></div></header>
+   <div class="selection-body">
+    <div id="character-grid" class="character-grid"></div>
+    <aside class="character-detail">
+     <div id="preview-art" class="preview-art"><span>✦</span></div>
+     <div class="eyebrow">HERO PROFILE</div><h3 id="preview-name">Akira</h3>
+     <p id="preview-desc">Seorang petualang muda.</p>
+     <div class="detail-line"><span>Elemen</span><b id="preview-element">Api</b></div>
+     <div class="detail-line"><span>Senjata</span><b id="preview-weapon">Katana</b></div>
+     <div class="detail-line"><span>Gaya bertarung</span><b id="preview-style">Seimbang</b></div>
+     <button id="confirm-character" class="btn primary full">MULAI DENGAN HERO INI →</button>
+    </aside>
+   </div>
+   <footer class="selection-footer"><button id="back-menu" class="btn">← KEMBALI</button><span>Pilih karakter untuk melihat detailnya</span></footer>
+  </div>
+ </section>
+
+ <section id="options-screen" class="screen"><div class="panel modal-panel">
+  <div class="eyebrow">CONFIGURATION</div><h2>Pengaturan</h2>
+  <label>Volume musik <input id="music-volume" type="range" min="0" max="1" step=".05" value=".28"></label>
+  <label>Volume efek <input id="sfx-volume" type="range" min="0" max="1" step=".05" value=".65"></label>
+  <label>Kualitas visual <select id="quality"><option value="high">Tinggi</option><option value="medium">Sedang</option><option value="low">Hemat baterai</option></select></label>
+  <button id="options-back" class="btn primary full">KEMBALI</button>
+ </div></section>
+ <section id="credits-screen" class="screen"><div class="panel modal-panel"><div class="eyebrow">THE MAKERS</div><h2>Chronicles of the Five</h2><p>Game RPG 2D top-down berbasis Canvas, JavaScript, dan Web Audio. Dunia, tile, karakter, dan efek dibuat secara prosedural agar dapat dimainkan tanpa mengunduh aset eksternal.</p><button id="credits-back" class="btn primary full">KEMBALI</button></div></section>
+
+ <section id="game-ui" class="hidden">
+  <header class="hud">
+   <div class="hero-hud"><div class="hero-emblem" id="portrait">🔥</div><div class="hero-info"><div class="hero-row"><b id="hud-name">Akira</b><span id="hud-level">LV 1</span></div><div class="meter hp"><i id="hp-fill"></i><span id="hp-text">100/100</span></div><div class="meter mp"><i id="mp-fill"></i><span id="mp-text">60/60</span></div><div class="xp-meter"><i id="xp-fill"></i></div></div></div>
+   <div class="hud-center"><div class="location-label">✦ <span id="location-name">Hutan Embun</span></div><div class="objective" id="quest-text">Jelajahi hutan dan temukan rahasia kuno.</div></div>
+   <div class="hud-right"><div class="mini-frame"><canvas id="minimap" width="160" height="120"></canvas></div><button id="pause-btn" class="pause-btn">Ⅱ</button></div>
+  </header>
+  <div class="element-switch"><span>ELEMEN</span><button class="element active" data-element="fire">🔥</button><button class="element" data-element="water">💧</button><button class="element" data-element="lightning">⚡</button><button class="element" data-element="earth">🪨</button><button class="element" data-element="wind">🌀</button></div>
+  <div id="toast" class="toast"></div>
+  <div class="bottom-controls"><div id="joystick" class="joystick"><div class="joy-base"></div><div id="joy-knob" class="joy-knob"></div></div><div class="combat-controls"><button id="dash-btn" class="control-btn">DASH<small>SHIFT</small></button><button id="skill-btn" class="control-btn skill">SKILL<small>K</small></button><button id="attack-btn" class="control-btn attack">SERANG<small>J / SPACE</small></button></div></div>
+ </section>
+
+ <section id="pause-screen" class="screen overlay"><div class="panel modal-panel"><div class="eyebrow">GAME PAUSED</div><h2>Petualangan Dijeda</h2><button id="resume-game" class="btn primary full">LANJUTKAN</button><button id="save-game" class="btn full">SIMPAN PERMAINAN</button><button id="quit-game" class="btn full">KEMBALI KE MENU</button></div></section>
+ <div id="error-screen" class="error-screen hidden"><b>Game gagal dimulai</b><span id="error-message">Terjadi kesalahan.</span><button onclick="location.reload()">MUAT ULANG</button></div>
+</div>
+<script src="src/data.js?v=2.1"></script><script src="src/audio.js?v=2.1"></script><script src="src/world.js?v=2.1"></script><script src="src/vfx.js?v=2.1"></script><script src="src/main.js?v=2.1"></script>
+</body></html>
