@@ -1,28 +1,41 @@
-# RPG Adventure — 16-bit Open World
+# Chronicles of the Five — Enhanced World & VFX Edition
 
-Game RPG browser dengan HTML, CSS, JavaScript, Canvas 2D, dan Web Audio API.
+Game RPG 2D top-down berbasis HTML Canvas, JavaScript, CSS, dan Web Audio. Tidak membutuhkan framework atau server backend.
 
 ## Menjalankan
-1. Download/clone repository.
-2. Buka `index.html` dengan browser modern.
-3. Untuk GitHub Pages: Settings → Pages → Deploy from a branch → pilih `main` dan `/root`.
 
-## Kontrol
-- WASD / tombol panah: bergerak
-- Space atau J: serang
-- K: skill elemen
-- Shift: dash
-- E: ganti elemen
-- Esc: jeda
-- Layar sentuh: joystick dan tombol aksi
+- Buka `index.html` melalui GitHub Pages atau server statis.
+- Jangan memindahkan file dari folder `src/` karena semua script dan aset memakai path relatif.
+- Tombol **Mulai Petualangan** membuka pemilihan karakter; pilih satu dari 20 hero lalu tekan **Mulai dengan Hero Ini**.
 
 ## Struktur
-- `index.html` — menu, layar karakter, HUD, kontrol
-- `styles.css` — UI responsif dan tema pixel fantasy
-- `src/data.js` — 20 karakter, elemen, senjata, kombinasi, monster
-- `src/audio.js` — musik dan efek suara sintetis
-- `src/world.js` — generator tile map dan dekorasi
-- `src/main.js` — game loop, kamera, combat, input, partikel, save
 
-## Catatan pengembangan
-Dunia dan sprite saat ini digambar secara prosedural. Ini adalah fondasi playable yang bisa dikembangkan dengan sprite sheet PNG, tile set, animasi frame, quest, NPC, dungeon, boss, dan sistem equipment yang lebih lengkap.
+```text
+index.html
+styles.css
+src/
+  data.js
+  audio.js
+  world.js
+  vfx.js
+  main.js
+  assets/
+    terrain-atlas.png
+    heroes/
+      hero-01.webp ... hero-20.webp
+```
+
+## Pembaruan versi ini
+
+- Memperbaiki alur menu dan membuat transisi pemilihan karakter tidak bergantung pada dukungan audio browser.
+- Menambahkan atlas tekstur pixel-art untuk rumput, tanah, jalur, air, batu, kayu, dan rune.
+- Menambahkan 20 ilustrasi hero untuk layar pemilihan karakter dan panel profil.
+- Menambahkan pipeline efek untuk ring sihir, slash, flash, sparks, partikel elemental, aura, dan ambience.
+- Memperbarui detail dunia, bangunan, pepohonan, altar, air animasi, dan pencahayaan.
+- Membatasi jumlah partikel dan menyesuaikan intensitas efek berdasarkan kualitas grafis.
+- Memperbaiki pemilihan kombinasi skill agar memakai elemen sebelumnya ketika pemain mengganti elemen.
+- Menambahkan cache-busting versi aset agar GitHub Pages tidak terus memakai file lama.
+
+## Catatan ukuran
+
+Ukuran proyek ditingkatkan dengan aset visual yang benar-benar dipakai, bukan dengan menambahkan komentar atau kode kosong. Ukuran setiap file kode tidak dipaksa melewati 200 KB karena file besar tanpa fungsi tambahan hanya memperlambat pemuatan dan perawatan proyek.
