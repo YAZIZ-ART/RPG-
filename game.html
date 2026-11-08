@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aetheria · Pertarungan</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/game.css"><link rel="stylesheet" href="css/hud.css">
+</head><body>
+<canvas id="c"></canvas>
+<div id="hud">
+ <div id="info" class="p">AETHERIA<br><span id="pos">X 0 Y 0</span></div>
+ <div id="btns"><button id="bz1">+</button><button id="bz0">−</button><button id="bt">SIANG</button><button id="bm">PETA</button><button id="bx">MENU</button></div>
+ <canvas id="mm" width="144" height="108"></canvas>
+</div>
+<div id="gh">
+ <div id="st" class="p"><b id="nm"></b> <span id="lv"></span>
+  <div class="br"><i id="hp"></i></div><div class="br m"><i id="mp"></i></div><div class="br x"><i id="xp"></i></div><small id="bs"></small></div>
+ <div id="boss" class="p"><span id="bn"></span><div class="br"><i id="bh"></i></div></div>
+ <div id="sk"></div>
+ <button id="atk">SERANG</button><button id="grd">TAMENG</button>
+ <div id="msg"><div class="p" id="mb"></div></div>
+</div>
+<div id="big"><canvas id="bg" width="576" height="432"></canvas></div>
+<div id="load">MEMUAT HUTAN…</div>
+<script src="js/data.js"></script><script src="js/passives.js"></script><script src="js/fx.js"></script><script src="js/monsters.js"></script>
+<script src="js/world.js"></script><script src="js/game.js"></script>
+</body></html>
