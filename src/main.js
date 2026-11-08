@@ -117,13 +117,14 @@ function attack(){
  for(const e of hit)if(e.hp<=0)killEnemy(e);
  state.combo=hit.length?state.combo+1:0;if(hit.length)toast(state.combo>1?`COMBO ×${state.combo}`:"Serangan mengenai target");
 }
+function pickPower(a,b){const L=DATA.powers.filter(x=>x.a===a&&x.b===b);state.pv=(state.pv||0)+1;return L.length?L[state.pv%L.length]:{i:-1,name:"Elemental Burst"}}
 function skill(){
  const p=state.player;if(state.mode!=="game"||!p||p.skillCd>0||p.mp<22)return;
  p.mp-=22;p.skillCd=1.35;GameAudio.sfx("magic");
  const first=p.element,second=p.previousElement&&p.previousElement!==first?p.previousElement:ELEMENTS[(ELEMENTS.indexOf(first)+1)%ELEMENTS.length];
- const combo=DATA.combinations[first+"-"+second]||"Elemental Burst",c1=DATA.elements[first].color,c2=DATA.elements[second].color,dmg=Math.round((80+p.level*6)*1.35);
+ const pw=pickPower(first,second),combo=pw.name,c1=DATA.elements[first].color,c2=DATA.elements[second].color,dmg=Math.round((80+p.level*6)*1.35);
  toast(combo+" · "+DATA.elements[first].name+" + "+DATA.elements[second].name);state.shake=7;
- window.RPGVFX?.skillBurst(first,second,p.x,p.y,c1,c2);burst(p.x,p.y,c1,80);
+ if(pw.i>=0&&window.SkillFX)window.SkillFX.cast(pw.i,p.x,p.y,Math.atan2(p.face.y,p.face.x),170);else window.RPGVFX?.skillBurst(first,second,p.x,p.y,c1,c2);burst(p.x,p.y,c1,80);
  for(const e of [...state.enemies]){const dx=e.x-p.x,dy=e.y-p.y,d=Math.hypot(dx,dy);if(d<175+e.size*.5){e.hp-=dmg;e.hit=.28;const l=d||1;if(!e.boss){e.knockX=dx/l*160;e.knockY=dy/l*160;}hitFx(e,first,dmg);if(e.hp<=0)killEnemy(e);}}
  updateHUD();
 }
@@ -165,7 +166,7 @@ function update(dt){
  for(const q of state.projectiles){q.x+=q.vx*dt;q.y+=q.vy*dt;q.life-=dt;window.RPGVFX?.burst(q.x,q.y,q.color,1,30,"ember");if(Math.hypot(q.x-p.x,q.y-p.y)<q.r+10){q.life=0;hurtPlayer(q.dmg);}}
  state.projectiles=state.projectiles.filter(q=>q.life>0&&!state.world.blocked(q.x,q.y,2));
  for(const w of state.pops){w.y-=38*dt;w.life-=dt;}state.pops=state.pops.filter(w=>w.life>0);state.shake=Math.max(0,state.shake-dt*14);
- window.RPGVFX?.update(dt);
+ window.RPGVFX?.update(dt);window.SkillFX?.update(dt);
  for(const q of state.particles){q.x+=q.vx*dt;q.y+=q.vy*dt;q.vy+=q.gravity*dt;q.vx*=Math.pow(.12,dt);q.life-=dt;}
  state.particles=state.particles.filter(q=>q.life>0);if(state.particles.length>420)state.particles.splice(0,state.particles.length-420);
  const maxX=state.world.size*32-viewW,maxY=state.world.size*32-viewH;
@@ -250,7 +251,7 @@ function render(){
   ctx.save();if(state.shake>0)ctx.translate((Math.random()-.5)*state.shake*1.6,(Math.random()-.5)*state.shake*1.6);
   state.world.draw(ctx,state.camera,viewW,viewH,state.time,state.quality);
   // draw enemies and particles; keep world layers simple and predictable
-  window.RPGVFX?.drawWorld(ctx,state.camera,state.time,state.quality);
+  window.RPGVFX?.drawWorld(ctx,state.camera,state.time,state.quality);window.SkillFX?.draw(ctx,state.camera);
   for(const e of state.enemies)drawEnemy(e);
   for(const q of state.particles){const x=q.x-state.camera.x,y=q.y-state.camera.y;ctx.globalAlpha=clamp(q.life/q.max,0,1);ctx.fillStyle=q.color;if(q.kind==="glow"){ctx.shadowBlur=10;ctx.shadowColor=q.color;}ctx.fillRect(x,y,q.size,q.size);ctx.shadowBlur=0;}
   ctx.globalAlpha=1;drawPlayer();drawProjectiles();drawPops();ctx.restore();window.RPGVFX?.drawScreen(ctx,viewW,viewH,state.time,state.player,state.camera,state.quality);
