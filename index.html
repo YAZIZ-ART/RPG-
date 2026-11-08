@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#101827">
 <meta name="description" content="Chronicles of the Five — petualangan RPG pixel-art dengan lima elemen, eksplorasi, monster, dan sihir.">
 <title>Chronicles of the Five — 2D Pixel RPG</title>
-<link rel="stylesheet" href="styles.css?v=3.0">
-<link rel="preload" href="src/assets/terrain-atlas.png" as="image">
+<link rel="stylesheet" href="styles.css?v=4.0">
+<link rel="preload" href="src/assets/terrain-atlas.png" as="image"><link rel="preload" href="src/assets/ui/menu.webp" as="image">
 </head>
 <body>
 <div id="app">
@@ -20,23 +20,19 @@
  </div>
 
  <section id="main-menu" class="screen active">
-  <div class="menu-stars"></div><div class="menu-content">
-   <div class="brand-mark">✦</div><div class="eyebrow">AN OPEN WORLD PIXEL RPG</div>
-   <h1>CHRONICLES <span>OF THE FIVE</span></h1>
-   <p class="subtitle">Lima elemen. Satu takdir. Dunia yang menunggu untuk dijelajahi.</p>
-   <div class="menu-actions">
-    <button id="new-game" class="btn primary">MULAI PETUALANGAN <span>▶</span></button>
-    <button id="continue-game" class="btn">LANJUTKAN PERMAINAN</button>
-    <button id="open-options" class="btn">PENGATURAN</button>
-    <button id="open-credits" class="btn">KREDIT</button>
-   </div>
-   <div class="menu-bottom">WASD / ARROW KEYS · J / SPACE SERANG · K SKILL · SHIFT DASH</div>
+  <div class="menu-stage">
+   <img class="menu-bg" src="src/assets/ui/menu.webp" alt="RPG Adventure" draggable="false">
+   <button id="new-game" class="hot" style="left:33.8%;top:37.4%;width:32.3%;height:11.7%" aria-label="Play"></button>
+   <button id="open-options" class="hot" style="left:37.8%;top:50.5%;width:24.4%;height:9.6%" aria-label="Options"></button>
+   <button id="open-credits" class="hot" style="left:37.8%;top:61.4%;width:24.4%;height:9.6%" aria-label="Credits"></button>
+   <button id="open-exit" class="hot" style="left:37.8%;top:72.3%;width:24.4%;height:9.6%" aria-label="Exit"></button>
+   <button id="continue-game" class="continue-chip">▶ LANJUTKAN</button>
   </div>
  </section>
 
  <section id="character-screen" class="screen">
   <div class="selection-layout panel">
-   <header class="section-head"><div><div class="eyebrow">CHOOSE YOUR HERO</div><h2>Pilih Petualang</h2><p>Setiap karakter memiliki elemen awal dan senjata khas.</p></div><div class="step-count">01 <i>/ 20</i></div></header>
+   <header class="section-head"><div><div class="eyebrow">CHOOSE YOUR HERO</div><h2>Pemilihan Karakter</h2><p>Pilih karakter yang akan kamu gunakan!</p></div><div class="step-count">01 <i>/ 20</i></div></header>
    <div class="selection-body">
     <div id="character-grid" class="character-grid"></div>
     <aside class="character-detail">
@@ -64,11 +60,11 @@
 
  <section id="game-ui" class="hidden">
   <header class="hud">
-   <div class="hero-hud"><div class="hero-emblem" id="portrait">🔥</div><div class="hero-info"><div class="hero-row"><b id="hud-name">Akira</b><span id="hud-level">LV 1</span></div><div class="meter hp"><i id="hp-fill"></i><span id="hp-text">100/100</span></div><div class="meter mp"><i id="mp-fill"></i><span id="mp-text">60/60</span></div><div class="xp-meter"><i id="xp-fill"></i></div></div></div>
+   <div class="hero-hud"><div class="hero-emblem" id="portrait"></div><div class="hero-info"><div class="hero-row"><b id="hud-name">Akira</b><span id="hud-level">LV 1</span></div><div class="meter hp"><i id="hp-fill"></i><span id="hp-text">100/100</span></div><div class="meter mp"><i id="mp-fill"></i><span id="mp-text">60/60</span></div><div class="xp-meter"><i id="xp-fill"></i></div></div></div>
    <div class="hud-center"><div class="location-label">✦ <span id="location-name">Hutan Embun</span></div><div class="objective" id="quest-text">Jelajahi hutan dan temukan rahasia kuno.</div></div>
    <div class="hud-right"><div class="mini-frame"><canvas id="minimap" width="160" height="120"></canvas></div><button id="pause-btn" class="pause-btn">Ⅱ</button></div>
   </header>
-  <div class="element-switch"><span>ELEMEN</span><button class="element active" data-element="fire">🔥</button><button class="element" data-element="water">💧</button><button class="element" data-element="lightning">⚡</button><button class="element" data-element="earth">🪨</button><button class="element" data-element="wind">🌀</button></div>
+  <div class="element-switch"><span>ELEMEN</span><button class="element active" data-element="fire"><img src="src/assets/ui/el-fire.png" alt="fire"></button><button class="element" data-element="water"><img src="src/assets/ui/el-water.png" alt="water"></button><button class="element" data-element="lightning"><img src="src/assets/ui/el-lightning.png" alt="lightning"></button><button class="element" data-element="earth"><img src="src/assets/ui/el-earth.png" alt="earth"></button><button class="element" data-element="wind"><img src="src/assets/ui/el-wind.png" alt="wind"></button></div>
   <div id="toast" class="toast"></div>
   <div class="bottom-controls"><div id="joystick" class="joystick"><div class="joy-base"></div><div id="joy-knob" class="joy-knob"></div></div><div class="combat-controls"><button id="dash-btn" class="control-btn">DASH<small>SHIFT</small></button><button id="skill-btn" class="control-btn skill">SKILL<small>K</small></button><button id="attack-btn" class="control-btn attack">SERANG<small>J / SPACE</small></button></div></div>
  </section>
@@ -76,5 +72,5 @@
  <section id="pause-screen" class="screen overlay"><div class="panel modal-panel"><div class="eyebrow">GAME PAUSED</div><h2>Petualangan Dijeda</h2><button id="resume-game" class="btn primary full">LANJUTKAN</button><button id="save-game" class="btn full">SIMPAN PERMAINAN</button><button id="quit-game" class="btn full">KEMBALI KE MENU</button></div></section>
  <div id="error-screen" class="error-screen hidden"><b>Game gagal dimulai</b><span id="error-message">Terjadi kesalahan.</span><button onclick="location.reload()">MUAT ULANG</button></div>
 </div>
-<script src="src/data.js?v=3.0"></script><script src="src/audio.js?v=3.0"></script><script src="src/world.js?v=3.0"></script><script src="src/vfx.js?v=3.0"></script><script src="src/main.js?v=3.0"></script>
+<script src="src/data.js?v=4.0"></script><script src="src/audio.js?v=4.0"></script><script src="src/world.js?v=4.0"></script><script src="src/vfx.js?v=4.0"></script><script src="src/main.js?v=4.0"></script>
 </body></html>
