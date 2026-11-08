@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aetheria · Pemilihan Karakter</title>
+<link rel="stylesheet" href="css/karakter.css">
+</head><body>
+<canvas id="bg"></canvas>
+<main>
+ <div class="ttl">
+  <svg class="star l" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+  <h1>Pemilihan Karakter</h1>
+  <svg class="star r" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+ </div>
+ <p class="sub" id="sub">Pilih karakter yang akan kamu gunakan!</p>
+ <div id="gr" role="radiogroup" aria-label="Daftar karakter"></div>
+ <div class="bar">
+  <button class="btn" id="back" type="button"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M11 4l-8 8 8 8v-5h10V9H11z"/></svg>Kembali</button>
+  <div class="lg" id="lg"></div>
+  <button class="btn ok" id="ok" type="button" disabled>Konfirmasi<svg viewBox="0 0 24 24"><path fill="currentColor" d="M13 4l8 8-8 8v-5H3V9h10z"/></svg></button>
+ </div>
+</main>
+<script src="js/data.js"></script><script src="js/karakter.js"></script></body></html>
