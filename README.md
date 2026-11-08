@@ -13,3 +13,8 @@ Menu utama (gambar desain) → Pemilihan Karakter (20 hero) → Peta hutan → B
 - Efek serangan per elemen: api (bara), air (gelembung), tanah (pecahan batu), petir (kilat bercabang + rantai ke musuh lain), udara (pusaran).
 - Skill = kombinasi elemen aktif + elemen sebelumnya (20 nama dari tabel desain), efek ring ganda, pusaran, layar bergetar.
 - Angka damage melayang, hit flash, bayangan, ikon elemen pixel.
+
+## Yang baru di v6
+- `src/skillfx.js`: 40 efek kekuatan dari kode (14 motif: kabut, kolam lava/lumpur, bola energi, pusaran, gelombang, gempa, tarikan magnet, tembok, petir, hujan, naga, matahari, sinar, pelangi/aurora), tiap kekuatan punya warna & bentuk sendiri.
+- Skill memilih salah satu dari 40 kekuatan sesuai pasangan elemen (aktif + sebelumnya); pasangan yang punya beberapa variasi bergantian tiap dipakai.
+- Menu & pemilihan karakter: hover glow, kartu terpilih berdenyut, potret hero melayang.
