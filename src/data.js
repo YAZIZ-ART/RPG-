@@ -1,11 +1,11 @@
 /* Game data — validated, plain JavaScript, no external dependency. */
 (() => {
  const elements={
-  fire:{name:"Api",icon:"🔥",color:"#ff713c",dark:"#8e2d20",description:"Serangan agresif dengan ledakan dan bara."},
-  water:{name:"Air",icon:"💧",color:"#42c9ff",dark:"#164c9a",description:"Kontrol area, gelombang, dan pemulihan."},
-  lightning:{name:"Listrik",icon:"⚡",color:"#ffe45a",dark:"#8c641d",description:"Serangan cepat dan rantai energi."},
-  earth:{name:"Tanah",icon:"🪨",color:"#d6a36a",dark:"#70452b",description:"Pertahanan kuat dan hantaman berat."},
-  wind:{name:"Udara",icon:"🌀",color:"#69e4d0",dark:"#176b72",description:"Mobilitas tinggi dan tebasan angin."}
+  fire:{img:"src/assets/ui/el-fire.png",name:"Api",icon:"🔥",color:"#ff713c",dark:"#8e2d20",description:"Serangan agresif dengan ledakan dan bara."},
+  water:{img:"src/assets/ui/el-water.png",name:"Air",icon:"💧",color:"#42c9ff",dark:"#164c9a",description:"Kontrol area, gelombang, dan pemulihan."},
+  lightning:{img:"src/assets/ui/el-lightning.png",name:"Listrik",icon:"⚡",color:"#ffe45a",dark:"#8c641d",description:"Serangan cepat dan rantai energi."},
+  earth:{img:"src/assets/ui/el-earth.png",name:"Tanah",icon:"🪨",color:"#d6a36a",dark:"#70452b",description:"Pertahanan kuat dan hantaman berat."},
+  wind:{img:"src/assets/ui/el-wind.png",name:"Udara",icon:"🌀",color:"#69e4d0",dark:"#176b72",description:"Mobilitas tinggi dan tebasan angin."}
  };
  const raw=[
  ["Akira","fire","Katana","Duelist"],["Seraphina","lightning","Rapier","Swift striker"],["Varkas","earth","Longsword","Vanguard"],["Evelyne","water","Tanto","Trickster"],["Raiden","wind","Spear","Lancer"],
@@ -15,18 +15,16 @@
  ];
  const characters=raw.map((c,i)=>({id:i,name:c[0],element:c[1],weapon:c[2],style:c[3],level:1,description:`${c[0]} adalah petualang ${c[3].toLowerCase()} yang menguasai elemen ${elements[c[1]].name.toLowerCase()}.`}));
  const combinations={
-  "fire-water":"Uap Mendidih","fire-earth":"Lava Membara","fire-lightning":"Plasma","fire-wind":"Pusaran Api",
-  "water-fire":"Gelombang Uap","water-earth":"Lumpur Arus","water-lightning":"Arus Bermuatan","water-wind":"Kabut Es",
-  "lightning-fire":"Halilintar","lightning-water":"Petir Konduktor","lightning-earth":"Magnetisme","lightning-wind":"Kilat Badai",
-  "earth-fire":"Batu Magma","earth-water":"Benteng Lumpur","earth-lightning":"Titan Magnetik","earth-wind":"Debu Badai",
-  "wind-fire":"Angin Topan Api","wind-water":"Tsunami","wind-earth":"Badai Pasir","wind-lightning":"Tornado Petir"
+  "fire-water":"Uap","fire-earth":"Lava","fire-lightning":"Plasma","fire-wind":"Pusaran Api",
+  "water-earth":"Lumpur","water-lightning":"Air Bermuatan","water-wind":"Es","water-fire":"Gelombang Pasang",
+  "earth-fire":"Batu Panas","earth-lightning":"Magnetisme","earth-wind":"Debu Angin","earth-water":"Tembok Batu",
+  "lightning-fire":"Ledakan Petir","lightning-water":"Medan Listrik","lightning-wind":"Badai Petir","lightning-earth":"Getaran Seismik",
+  "wind-fire":"Angin Topan","wind-water":"Kabut Ilusi","wind-earth":"Debu Silir","wind-lightning":"Tornado Petir"
  };
  const monsters=[
-  {id:"slime",name:"Blue Slime",hp:38,damage:5,xp:14,color:"#42caff",size:13,speed:38,aggro:250},
-  {id:"goblin",name:"Forest Goblin",hp:64,damage:8,xp:25,color:"#91d451",size:15,speed:48,aggro:290},
-  {id:"boar",name:"Wild Boar",hp:82,damage:11,xp:34,color:"#b8794d",size:17,speed:62,aggro:230},
-  {id:"wisp",name:"Shadow Wisp",hp:50,damage:9,xp:30,color:"#b57aff",size:12,speed:55,aggro:320},
-  {id:"moss",name:"Moss Guardian",hp:145,damage:16,xp:70,color:"#4caa76",size:22,speed:28,aggro:360}
+  {id:"slime",name:"Slime",lv:"Lv. 1-5",sprite:"slime",w:46,hp:42,damage:6,xp:14,color:"#42caff",size:14,speed:36,aggro:240,weight:6},
+  {id:"goblin",name:"Goblin",lv:"Lv. 6-15",sprite:"goblin",w:58,hp:120,damage:12,xp:40,color:"#91d451",size:16,speed:52,aggro:300,weight:3},
+  {id:"dragon",name:"Shadow Dragon",lv:"Lv. 30+",sprite:"dragon",w:200,hp:1400,damage:30,xp:700,color:"#a855f7",size:48,speed:34,aggro:420,boss:true,weight:0}
  ];
  window.GAME_DATA={elements,characters,combinations,monsters};
 })();
