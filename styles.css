@@ -79,3 +79,34 @@ html,body,#app{min-height:100%;min-height:100dvh}
 }
 @media (min-width:901px) and (orientation:landscape){.selection-layout{max-width:1240px}.character-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.orientation-icon{animation:none}}
+
+/* VERSION 4.0 — menu bergambar, kartu karakter elemen, ikon elemen pixel */
+#main-menu{padding:0;background:#0b0a2a}
+.menu-stage{position:relative;width:min(100vw,177.7vh);aspect-ratio:1672/941;max-height:100dvh}
+.menu-bg{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;user-select:none;-webkit-user-drag:none}
+.hot{position:absolute;background:transparent;border:0;border-radius:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hot:hover{background:#ffffff14;box-shadow:0 0 18px #ffd36a66}.hot:active{background:#ffffff26}
+.continue-chip{position:absolute;right:2%;bottom:3%;background:#1a1040dd;border:2px solid #8b5cf6;color:#e9d5ff;font:700 clamp(9px,1.5vw,14px) 'Oxanium',sans-serif;padding:.7em 1.2em;letter-spacing:1px;box-shadow:0 0 14px #7c3aed88}
+.screen:not(#main-menu){background:radial-gradient(ellipse at 50% 0,#2a1668cc,#0a0826f2 70%),#0a0826}
+.panel{border:2px solid #7c4dff99;box-shadow:0 0 40px #5b2bff44,inset 0 0 30px #2a166833}
+.section-head h2{color:#fff;text-shadow:0 0 14px #a78bfa,0 3px 0 #3b1d8f}.eyebrow{color:#c4b5fd}
+.character-card{border:2px solid #8b5cf6aa;background:linear-gradient(160deg,#241a60,#3b1d8f)}
+.character-card[data-el=fire]{background:linear-gradient(160deg,#6b2a8f,#e0582a)}
+.character-card[data-el=water]{background:linear-gradient(160deg,#4b2aa8,#1fa8e8)}
+.character-card[data-el=earth]{background:linear-gradient(160deg,#4a2a6f,#d89a3a)}
+.character-card[data-el=lightning]{background:linear-gradient(160deg,#6a2ab0,#f0c62a)}
+.character-card[data-el=wind]{background:linear-gradient(160deg,#2a3aa8,#35d6c2)}
+.character-card:hover,.character-card.selected{border-color:#fff3b0;box-shadow:0 0 16px #ffd36a99;background-blend-mode:normal}
+.character-card .avatar span,.preview-art span{display:block;width:20px;height:20px}
+.character-card .avatar span img,.preview-art span img,.element img{width:100%;height:100%;image-rendering:pixelated;display:block}
+.preview-art span{width:34px;height:34px}
+.element{padding:0;overflow:hidden}.element.active{border-color:#fff3b0;box-shadow:0 0 14px #ffd36acc}
+.hero-emblem{overflow:hidden;padding:0}.hero-emblem img{width:100%;height:100%;object-fit:cover;display:block}
+.btn.primary{background:linear-gradient(180deg,#ffd76a,#d98a1f);color:#2a1604}
+
+.character-card{padding:0;min-height:0;border:2px solid #6d4cff88;background:#120a3a;aspect-ratio:300/165;overflow:hidden}
+.character-card .cardart{width:100%;height:100%;object-fit:cover;display:block;image-rendering:pixelated}
+.character-card:hover,.character-card.selected{border-color:#fff3b0;box-shadow:0 0 16px #ffd36acc;transform:translateY(-1px)}
+.preview-art{height:auto;aspect-ratio:300/165}.preview-art img{position:static;width:100%;height:100%;object-fit:cover;image-rendering:pixelated}
+.character-grid{gap:6px}
+@media (orientation:landscape) and (max-height:520px){.character-card{min-height:0}.character-card .avatar{height:auto}}
