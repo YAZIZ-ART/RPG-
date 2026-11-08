@@ -1,41 +1,15 @@
-# Chronicles of the Five — Enhanced World & VFX Edition
+# Chronicles of the Five — v5 (Pixel RPG Visual Upgrade)
 
-Game RPG 2D top-down berbasis HTML Canvas, JavaScript, CSS, dan Web Audio. Tidak membutuhkan framework atau server backend.
+Cara pakai: upload isi folder ini (bukan file ZIP-nya) ke GitHub, timpa file dengan path yang sama, lalu buka index.html lewat GitHub Pages.
 
-## Menjalankan
+## Alur game
+Menu utama (gambar desain) → Pemilihan Karakter (20 hero) → Peta hutan → Bertarung.
 
-- Buka `index.html` melalui GitHub Pages atau server statis.
-- Jangan memindahkan file dari folder `src/` karena semua script dan aset memakai path relatif.
-- Tombol **Mulai Petualangan** membuka pemilihan karakter; pilih satu dari 20 hero lalu tekan **Mulai dengan Hero Ini**.
-
-## Struktur
-
-```text
-index.html
-styles.css
-src/
-  data.js
-  audio.js
-  world.js
-  vfx.js
-  main.js
-  assets/
-    terrain-atlas.png
-    heroes/
-      hero-01.webp ... hero-20.webp
-```
-
-## Pembaruan versi ini
-
-- Memperbaiki alur menu dan membuat transisi pemilihan karakter tidak bergantung pada dukungan audio browser.
-- Menambahkan atlas tekstur pixel-art untuk rumput, tanah, jalur, air, batu, kayu, dan rune.
-- Menambahkan 20 ilustrasi hero untuk layar pemilihan karakter dan panel profil.
-- Menambahkan pipeline efek untuk ring sihir, slash, flash, sparks, partikel elemental, aura, dan ambience.
-- Memperbarui detail dunia, bangunan, pepohonan, altar, air animasi, dan pencahayaan.
-- Membatasi jumlah partikel dan menyesuaikan intensitas efek berdasarkan kualitas grafis.
-- Memperbaiki pemilihan kombinasi skill agar memakai elemen sebelumnya ketika pemain mengganti elemen.
-- Menambahkan cache-busting versi aset agar GitHub Pages tidak terus memakai file lama.
-
-## Catatan ukuran
-
-Ukuran proyek ditingkatkan dengan aset visual yang benar-benar dipakai, bukan dengan menambahkan komentar atau kode kosong. Ukuran setiap file kode tidak dipaksa melewati 200 KB karena file besar tanpa fungsi tambahan hanya memperlambat pemuatan dan perawatan proyek.
+## Yang baru di v5
+- Menu utama memakai gambar desain; tombol PLAY / OPTIONS / CREDITS / EXIT aktif di atas gambar.
+- 20 kartu karakter sesuai desain, warna kartu mengikuti elemen; potret HUD diambil dari kartu.
+- Terrain dari tile desain (rumput, jalan, air), pohon/batu/kristal/rumah/sumur/obor/peti dari sprite pixel art.
+- Monster: Slime (Lv 1-5), Goblin (Lv 6-15), Shadow Dragon (boss Lv 30+, menembak 3 bola energi).
+- Efek serangan per elemen: api (bara), air (gelembung), tanah (pecahan batu), petir (kilat bercabang + rantai ke musuh lain), udara (pusaran).
+- Skill = kombinasi elemen aktif + elemen sebelumnya (20 nama dari tabel desain), efek ring ganda, pusaran, layar bergetar.
+- Angka damage melayang, hit flash, bayangan, ikon elemen pixel.
