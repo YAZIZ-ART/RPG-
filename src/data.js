@@ -26,5 +26,7 @@
   {id:"goblin",name:"Goblin",lv:"Lv. 6-15",sprite:"goblin",w:58,hp:120,damage:12,xp:40,color:"#91d451",size:16,speed:52,aggro:300,weight:3},
   {id:"dragon",name:"Shadow Dragon",lv:"Lv. 30+",sprite:"dragon",w:200,hp:1400,damage:30,xp:700,color:"#a855f7",size:48,speed:34,aggro:420,boss:true,weight:0}
  ];
- window.GAME_DATA={elements,characters,combinations,monsters};
+ const EM={f:"fire",w:"water",l:"lightning",e:"earth",a:"wind"};
+ const powers='fw:Uap;fe:Lava;fl:Plasma;fa:Pusaran Api;we:Lumpur;wl:Air Bermuatan;wa:Es;wf:Gelombang Pasang;ef:Batu Panas;el:Magnetisme;ea:Debu Angin;ew:Tembok Batu;lf:Ledakan Petir;lw:Medan Listrik;la:Badai Petir;le:Getaran Seismik;af:Angin Topan;aw:Kabut Ilusi;ae:Debu Silir;al:Tornado Petir;fe:Naga Bara;fa:Semburan Surya;fe:Lava;fl:Halilintar;we:Rimba Purba;aw:Fatamorgana;wl:Nadi Kehidupan;we:Banjir Bandang;ea:Langkah Gemuruh;el:Titan Mekanik;el:Magnetisme;el:Getaran Seismik;wl:Arus Listrik;wl:Badai Petir;la:Kilat Ruang;la:Gelombang Sonik;aw:Hujan;aw:Pelangi;ae:Tsunami;la:Aurora'.split(";").map((s,i)=>({i,a:EM[s[0]],b:EM[s[1]],name:s.slice(3)}));
+ window.GAME_DATA={elements,characters,combinations,monsters,powers};
 })();
