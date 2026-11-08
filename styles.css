@@ -110,3 +110,17 @@ html,body,#app{min-height:100%;min-height:100dvh}
 .preview-art{height:auto;aspect-ratio:300/165}.preview-art img{position:static;width:100%;height:100%;object-fit:cover;image-rendering:pixelated}
 .character-grid{gap:6px}
 @media (orientation:landscape) and (max-height:520px){.character-card{min-height:0}.character-card .avatar{height:auto}}
+
+/* v6 — menu & pemilihan karakter */
+.hot{transition:box-shadow .2s,background .2s,transform .15s;border-radius:14px}
+.hot:hover,.hot:focus-visible{background:rgba(255,230,150,.14);box-shadow:0 0 22px 4px rgba(255,214,102,.55);transform:scale(1.03)}
+.hot:active{transform:scale(.97)}
+.menu-bg{animation:menuDrift 14s ease-in-out infinite alternate}
+@keyframes menuDrift{from{transform:scale(1)}to{transform:scale(1.035)}}
+.character-card{transition:transform .18s,box-shadow .18s,filter .18s;filter:saturate(.85) brightness(.9)}
+.character-card:hover{transform:translateY(-3px) scale(1.04);filter:none}
+.character-card.selected{transform:translateY(-4px) scale(1.06);filter:none;box-shadow:0 0 0 2px #ffe08a,0 0 24px rgba(255,214,102,.7);animation:cardPulse 1.6s ease-in-out infinite}
+@keyframes cardPulse{50%{box-shadow:0 0 0 2px #fff3c4,0 0 34px rgba(255,214,102,.95)}}
+.preview-art{animation:heroFloat 3.2s ease-in-out infinite;box-shadow:0 0 30px rgba(255,214,102,.25)}
+@keyframes heroFloat{50%{transform:translateY(-6px)}}
+.character-detail .btn.primary{animation:cardPulse 2s ease-in-out infinite}
