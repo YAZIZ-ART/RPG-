@@ -1,34 +1,17 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Aetheria: Echoes of the Five Elements</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/menu.css">
-</head><body>
-<canvas id="s"></canvas><div id="vg"></div>
-<main id="m">
-<svg id="logo" viewBox="0 0 520 212" aria-label="Aetheria">
-<defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2a0"/><stop offset=".45" stop-color="#ffc83a"/><stop offset="1" stop-color="#e08a10"/></linearGradient>
-<linearGradient id="wg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c78aff"/><stop offset="1" stop-color="#6a2ac0"/></linearGradient></defs>
-<g id="wl"><path d="M200 58 L150 22 L58 26 L96 46 L42 60 L100 74 L70 98 L168 108 L204 104Z" fill="url(#wg)" stroke="#220a58" stroke-width="5" stroke-linejoin="round"/><path d="M196 62 L150 34 L96 38 L128 54 L84 66 L130 80 L110 96 L196 100Z" fill="#b070ff" opacity=".55"/></g>
-<use href="#wl" transform="translate(520 0) scale(-1 1)"/>
-<polygon points="228,50 232,20 246,34 260,10 274,34 288,20 292,50" fill="#ffc83a" stroke="#3a1a00" stroke-width="4" stroke-linejoin="round"/>
-<rect x="228" y="48" width="64" height="11" fill="#f5a020" stroke="#3a1a00" stroke-width="4"/>
-<circle cx="260" cy="40" r="5" fill="#b04af0" stroke="#3a1a00" stroke-width="2"/><circle cx="244" cy="53" r="2.5" fill="#ff5a6a"/><circle cx="276" cy="53" r="2.5" fill="#ff5a6a"/>
-<g font-family="'Press Start 2P',monospace" font-size="56" text-anchor="middle" textLength="330" lengthAdjust="spacingAndGlyphs">
-<text x="260" y="157" textLength="330" lengthAdjust="spacingAndGlyphs" fill="#7a3a00" stroke="#2a1000" stroke-width="14" stroke-linejoin="round">AETHERIA</text>
-<text x="260" y="149" textLength="330" lengthAdjust="spacingAndGlyphs" fill="url(#gd)" stroke="#2a1000" stroke-width="12" stroke-linejoin="round" paint-order="stroke">AETHERIA</text></g>
-<polygon points="70,178 100,152 420,152 450,178 420,204 100,204" fill="#241268" stroke="#9a7af8" stroke-width="4"/>
-<polygon points="86,178 106,161 414,161 434,178 414,195 106,195" fill="none" stroke="#4a3ab0" stroke-width="2"/>
-<text x="260" y="189" text-anchor="middle" font-family="'Press Start 2P',monospace" font-size="22" textLength="300" lengthAdjust="spacingAndGlyphs" fill="#fff" stroke="#10083a" stroke-width="6" stroke-linejoin="round" paint-order="stroke">FIVE ELEMENTS</text>
-<polygon points="34,178 54,164 74,178 54,192" fill="#8a50f0" stroke="#e0c8ff" stroke-width="2"/><polygon points="446,178 466,164 486,178 466,192" fill="#8a50f0" stroke="#e0c8ff" stroke-width="2"/>
-</svg>
-<nav>
-<div class="row"><i class="orn l"></i><button class="b play sel" data-a="play"><svg viewBox="0 0 26 26"><polygon points="4,3 22,13 4,23" fill="#ffd23a" stroke="#7a4a00" stroke-width="2"/></svg><span>PLAY</span></button><i class="orn r"></i></div>
-<div class="row"><button class="b" data-a="opt"><svg viewBox="0 0 26 26"><g fill="#e8e4ff"><circle cx="13" cy="13" r="8"/><rect x="11" y="1" width="4" height="24"/><rect x="1" y="11" width="24" height="4"/><rect x="11" y="1" width="4" height="24" transform="rotate(45 13 13)"/><rect x="11" y="1" width="4" height="24" transform="rotate(-45 13 13)"/></g><circle cx="13" cy="13" r="4" fill="#2a1a6a"/></svg><span>OPTIONS</span></button></div>
-<div class="row"><button class="b" data-a="cre"><svg viewBox="0 0 26 26"><rect x="5" y="3" width="16" height="20" fill="#e8d4a0" stroke="#7a5530" stroke-width="2"/><path d="M8 8h10M8 12h10M8 16h7" stroke="#7a5530" stroke-width="2"/></svg><span>CREDITS</span></button></div>
-<div class="row"><button class="b" data-a="exit"><svg viewBox="0 0 26 26"><rect x="6" y="2" width="14" height="22" fill="#c88a4a" stroke="#5a3418" stroke-width="2"/><rect x="9" y="5" width="8" height="16" fill="#e0a860"/><circle cx="16" cy="14" r="1.5" fill="#3a2010"/></svg><span>EXIT</span></button></div>
-</nav></main>
-<div id="md"><div class="panel"><h2 id="mt"></h2><div id="mb"></div><div id="mf"></div></div></div>
-<div id="fade"></div>
-<script src="js/menu.js"></script></body></html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>AETHERIA - Echoes of the Five Elements</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="c"></canvas>
+<script src="js/assets.js"></script>
+<script src="js/game.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/vfx.js"></script>
+<script src="js/systems.js"></script>
+</body>
+</html>
