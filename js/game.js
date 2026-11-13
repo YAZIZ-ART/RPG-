@@ -1039,7 +1039,7 @@ function bgmTick(){const ac=AU.ac;if(!ac||ac.state!=='running'||!AU.on)return;co
       if(st%2===0)N(.04,.07,at,{f0:8000,ty:'highpass',bus:AU.bgm});
       if(st%2===1)T(mf(ch[0]-24),mf(ch[0]-24),.18,'sawtooth',.06,at,{bus:AU.bgm,lp:420,a:.005});}
     BG.step++;BG.next+=sp;}}
-setInterval(bgmTick,90);
+setInterval(()=>{},90);
 /* tombol suara + aktivasi audio saat sentuh pertama */
 addEventListener('pointerdown',auResume,true);addEventListener('keydown',auResume,true);
 function setSnd(v){AU.on=v;if(AU.m)AU.m.gain.value=v?.9:0;try{localStorage.setItem('aeth_mute',v?'0':'1')}catch(_){}}
@@ -1141,13 +1141,13 @@ const _ai7=auInit;
 auInit=function(){const had=AU.ac;_ai7();const ac=AU.ac;if(had||!ac)return;
  try{const m=AU.m;m.disconnect();
   const mk=(ty,f,g,q)=>{const b=ac.createBiquadFilter();b.type=ty;b.frequency.value=f;b.gain.value=g;if(q)b.Q.value=q;return b};
-  const lo=mk('lowshelf',95,9),md=mk('peaking',420,-2,.9),pr=mk('peaking',3200,5,1.1),ai=mk('highshelf',8500,4.5);
-  const ws=ac.createWaveShaper(),cv=new Float32Array(2048);for(let i=0;i<2048;i++){const x=i/1024-1;cv[i]=Math.tanh(x*2.2)/Math.tanh(2.2);}ws.curve=cv;ws.oversample='4x';
-  const cp=ac.createDynamicsCompressor();cp.threshold.value=-24;cp.knee.value=12;cp.ratio.value=6;cp.attack.value=.002;cp.release.value=.14;
-  const mu=ac.createGain();mu.gain.value=1.45;
-  const lm=ac.createDynamicsCompressor();lm.threshold.value=-1.5;lm.knee.value=0;lm.ratio.value=20;lm.attack.value=.0008;lm.release.value=.06;
-  m.connect(lo);lo.connect(md);md.connect(pr);pr.connect(ai);ai.connect(ws);ws.connect(cp);cp.connect(mu);mu.connect(lm);lm.connect(ac.destination);
-  AU.sfx.gain.value=1.3;}catch(_){}};
+  const lo=mk('lowshelf',95,9),md=mk('peaking',420,-2,.9),pr=mk('peaking',3200,3.2,.9),ai=mk('highshelf',8500,2.5);
+  const ws=ac.createWaveShaper(),cv=new Float32Array(2048);for(let i=0;i<2048;i++){const x=i/1024-1;cv[i]=Math.tanh(x*1.25)/Math.tanh(1.25);}ws.curve=cv;ws.oversample='4x';const hp=mk('highpass',28,0),lp=mk('lowpass',16500,0);
+  const cp=ac.createDynamicsCompressor();cp.threshold.value=-20;cp.knee.value=20;cp.ratio.value=3.5;cp.attack.value=.004;cp.release.value=.2;
+  const mu=ac.createGain();mu.gain.value=1.25;
+  const lm=ac.createDynamicsCompressor();lm.threshold.value=-2.5;lm.knee.value=6;lm.ratio.value=16;lm.attack.value=.001;lm.release.value=.09;
+  m.connect(lo);lo.connect(md);md.connect(pr);pr.connect(ai);ai.connect(ws);ws.connect(cp);cp.connect(hp);hp.connect(lp);lp.connect(mu);mu.connect(lm);const sf=ac.createWaveShaper(),c2=new Float32Array(1024);for(let i=0;i<1024;i++){const x=i/512-1;c2[i]=.97*Math.tanh(1.3*x)/Math.tanh(1.3);}sf.curve=c2;lm.connect(sf);sf.connect(ac.destination);
+  AU.sfx.gain.value=1.15;}catch(_){}};
 /* lapisan suara khas tiap elemen (a=jeda, v=volume, h=1 untuk ledakan besar/jurus) */
 const glass=(v,a,n)=>{for(let i=0;i<n;i++)FMT(3200+R()*5200,2.76+R(),1.6,.35+R()*.3,v*.2,a+i*.035+R()*.03,{rv:.45});N(.05,v*.6,a,{f0:7500,ty:'highpass'});};
 const ELX={
