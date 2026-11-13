@@ -23,7 +23,7 @@ win(v){[523,659,784,1047,784,1047,1319].forEach((f,i)=>{FMT(f,3,.8,.5,.2*v,i*.14
 lose(v){[440,392,349,294,220].forEach((f,i)=>{T(f,f*.99,.6,'triangle',.2*v,i*.25,{a:.02,rv:.5,lp:1800});T(f/2,f/2,.6,'sine',.2*v,i*.25,{a:.02});});}};
 function snd(n,v){if(ok9()&&S9[n])S9[n](v==null?1:v);}
 let BGMODE='field';const B9={n:0,st:0},RT9=[45,43,40,38];
-function bgm9(){if(!ok9()||BGMODE==='field'||state!=='battle')return;const ac=AU.ac,boss=BGMODE==='boss',sp=boss?.17:.2;if(B9.n<ac.currentTime)B9.n=ac.currentTime+.05;
+function bgm9(){return;if(!ok9()||BGMODE==='field'||state!=='battle')return;const ac=AU.ac,boss=BGMODE==='boss',sp=boss?.17:.2;if(B9.n<ac.currentTime)B9.n=ac.currentTime+.05;
  while(B9.n<ac.currentTime+.3){const st=B9.st,b=st%16,bar=(st>>4)%4,at=B9.n-ac.currentTime,o={bus:AU.bgm},root=mf(RT9[bar]);
   if(boss){if(b%8===0){T(root,root*.5,sp*8,'sawtooth',.2,at,{bus:AU.bgm,lp:500,a:.05,uni:12});T(root*3,root*3,sp*8,'sawtooth',.06,at,{bus:AU.bgm,lp:1200,a:.2,uni:15,rv:.4});}
    if(b%4===0)T(80,28,.3,'sine',.7,at,o);if(b%8===6||b===15)N(.12,.25,at,{f0:900,f1:200,ty:'lowpass',bus:AU.bgm,rv:.3});
